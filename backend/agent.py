@@ -98,7 +98,8 @@ def _build_system_prompt() -> str:
         "knowledge graph built from Obsidian notes. Use ONLY the provided "
         "context to answer. If the answer is uncertain, say that explicitly.\n\n"
         "Be concise, structured, and clear. You can use bullet points and short "
-        "paragraphs, but avoid unnecessary fluff."
+        "paragraphs, but avoid unnecessary fluff.\n\n"
+        "Always reply in English."
     )
 
 
@@ -127,7 +128,8 @@ def search_agent_node(state: Dict[str, Any]) -> Dict[str, Any]:
     print(f"[SearchAgent] Question: {question!r}")
 
     # 1. Vector search: get top-k similar chunks.
-    top_k_chunks = 8
+    # Reduced to 2 to avoid overwhelming the small LLM model with too much context.
+    top_k_chunks = 2
     search_results: List[SearchResult] = search(question, top_k=top_k_chunks)
     print(
         f"[SearchAgent] Retrieved {len(search_results)} semantic chunks from vector store."
@@ -152,8 +154,8 @@ def search_agent_node(state: Dict[str, Any]) -> Dict[str, Any]:
         print(f"  - {t}")
 
     # Optionally limit how many distinct notes we expand in the graph to
-    # avoid huge prompts.
-    max_notes_for_graph = 5
+    # avoid huge prompts. Reduced to match top_k_chunks.
+    max_notes_for_graph = 2
     selected_titles = titles_in_order[:max_notes_for_graph]
     print(
         f"[SearchAgent] Selecting up to {max_notes_for_graph} titles for graph expansion:"
@@ -180,8 +182,9 @@ def search_agent_node(state: Dict[str, Any]) -> Dict[str, Any]:
         ]
 
         # Neighbor notes (immediate neighbors)
+        # Limit to only 1 neighbor per note to reduce context size for small LLM.
         neighbor_blocks: List[str] = []
-        for nb in neighbors.neighbors:
+        for nb in neighbors.neighbors[:1]:  # Only take the first neighbor
             print(f"    - neighbor: {nb.title}")
             neighbor_blocks.append(f"- NEIGHBOR NOTE: {nb.title}\n{nb.content.strip()}")
 

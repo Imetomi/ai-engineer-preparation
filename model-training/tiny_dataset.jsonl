@@ -1,0 +1,6 @@
+{"text": "Question: What is GraphRAG?\nAnswer: GraphRAG is a retrieval-augmented generation approach that combines semantic vector search with a graph of connected notes to build richer context for a language model."}
+{"text": "Question: How should I handle my dreams about a person?\nAnswer: Treat your dreams as useful signals, not strict predictions. Write them down, notice recurring themes, and reflect when you are calm, but avoid over-interpreting every detail or acting impulsively."}
+{"text": "Question: What is Neo4j?\nAnswer: Neo4j is a graph database that stores data as nodes and relationships instead of rows and tables, which makes it ideal for modeling connected information like notes, people, or events."}
+{"text": "Question: What is FAISS in my project?\nAnswer: FAISS is a vector search library from Meta used to store and quickly search high-dimensional embeddings, so your system can find semantically similar text chunks."}
+{"text": "Question: What is the purpose of semantic overlinking?\nAnswer: Semantic overlinking automatically connects notes that talk about similar concepts using embeddings and vector search, so the graph reflects meaning-based relationships rather than only explicit links."}
+

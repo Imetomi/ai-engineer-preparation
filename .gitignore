@@ -1,0 +1,14 @@
+# Python / env
+__pycache__/
+.venv/
+*.pyc
+
+# Build / cache
+.cache/
+
+# Model training artifacts (large files)
+model-training/qwen3-0.6b-finetuned/
+
+# If you later add a FAISS index or other large artifacts, ignore them too, e.g.:
+# storage/faiss.index
+
